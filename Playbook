@@ -1,7 +1,33 @@
 
-- name: install nginx
-  hosts: web
-  roles:
-    - nginx
-
-
+- hosts: 192.168.56.101
+  become: yes
+  vars:
+   user: 
+    abdel
+   password
+    root
+    
+    
+  host: 192.168.56.101
+  tasks:
+  - name: install epel-release
+    yum:
+     name: epel-release
+     state: present
+  - name: install apache server
+    yum:
+     name: httpd
+     state: present
+  - name: install mariadb
+    yum:
+     name: mariadb
+     state: present
+  - name: configuration
+    template:
+     src: create_db.php
+     dest: /var/www/html
+     owner: root
+     group: root
+     
+    loop:
+     
