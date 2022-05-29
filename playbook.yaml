@@ -3,16 +3,14 @@
 - name: Création des users
   hosts: all
   become: yes
-  become_user: Abdel
-  tasks:
-    - name: installation apache server
-      yum:
-        name: httpd
-        state: present
-    - name: Redémarrer le service
-      service:
-        name: httpd
-        state: started
+  remote_user: Abdel
+  roles:
+   - create_user
+   
+- name: Installation du serveur web
+   hosts: [ServeurWEB]
+   roles:
+    -SQLWeb
         
         
    - name: installation mariadb
