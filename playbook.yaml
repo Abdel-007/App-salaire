@@ -1,7 +1,7 @@
 ---
 
 - name: Création des users
-  hosts: 192.168.56.101
+  hosts: all
   become: yes
   become_user: Abdel
   tasks:
@@ -16,14 +16,9 @@
         
         
    - name: installation mariadb
-     yum:
-       name: mariadb
-       state: present
-   - name: Redémarrer le service une fois installé
-     service:
-       name:
-       state: started
-     
+     hosts: [db]
+     roles:
+       - mariadb
 
 
    
